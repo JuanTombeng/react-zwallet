@@ -4,7 +4,8 @@ import './input.css'
 const Input = (props) => {
     return (
        <Fragment>
-            <input className='input' {...props} />
+            <i className={props.icon}></i>
+            <input className='input' {...props}  placeholder={props.placeholder}/>
        </Fragment>
     )
 }
