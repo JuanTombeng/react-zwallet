@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
 import './signup.css'
 import leftBackground from '../../images/bg-app.svg'
@@ -85,7 +85,10 @@ const Signup = () => {
                     type="password"
                     placeholder="Enter Your password"
                 />
-                <Button isLoading={loading} onClick={handleClick} className='btn btn-primary'>Sign Up</Button>
+                <Button isLoading={loading} onClick={handleClick} className='form-button d-flex align-items-center justify-content-center'>Sign Up</Button>
+                <div className="sign-up-parag">
+                    <p class="auth-form-label">Already have an account? <Link to="/login"> Login </Link></p>
+                </div>
                 {errorMessage ? alert(alert) : null}
             </section>
         </div>  

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
 import './login.css'
 import leftBackground from '../../images/bg-app.svg'
@@ -29,8 +29,12 @@ const Login = () => {
         }).then((res) => {
             setLoading(false)
             const result = res.data
-            console.log(result)
-            // setUserId(result.)
+            const userId =  result.data[0].id
+            const accountId = result.data[0].id_account
+            console.log(result.data)
+            localStorage.setItem('auth', "1")
+            localStorage.setItem('accountId', JSON.stringify(accountId))
+            localStorage.setItem('userId', JSON.stringify(userId))
             navigate('/')
         }).catch((err) => {
             setLoading(false)
@@ -78,9 +82,11 @@ const Login = () => {
                     type="password"
                     placeholder="Enter Your password"
                 />
-                <Button isLoading={loading} onClick={handleClick} className='btn btn-primary'>Login</Button>
-                
-                {errorMessage && <h1 className="text-danger">{errorMessage}</h1>}
+                {errorMessage && <h1 className="text-error">{errorMessage}</h1>}
+                <Button isLoading={loading} onClick={handleClick} className='form-button d-flex align-items-center justify-content-center'>Login</Button>
+                <div className="sign-up-parag">
+                    <p class="auth-form-label">Don’t have an account? <Link to="/signup"> Sign Up </Link></p>
+                </div>
             </section>
         </div>  
     )
