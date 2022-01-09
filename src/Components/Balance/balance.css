@@ -1,0 +1,28 @@
+.Balance {
+    width: 100%;
+    height: 30%;
+    background-color: #6379F4;
+    color: #FFFFFF;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.balance-title {
+    font-size: 18px;
+    line-height: 31px;
+    color: #E0E0E0;
+}
+
+.balance-amount {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 55px;
+    color: #FFFFFF;
+}
+
+.phone-number {
+    font-size: 14px;
+    line-height: 19px;
+    color: #DFDCDC;
+}
