@@ -1,0 +1,35 @@
+.Navbar {
+    background-color: burlywood;
+    width: 20%;
+    height: 90%;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 25px;
+    padding: 40px 20px;
+    justify-content: space-between;
+}
+
+
+.menu-list {
+    list-style: none;
+    padding-left: 50px;
+    font-size: 18px;
+    line-height: 31px;
+    color: rgba(58, 61, 66, 0.8);
+}
+
+.menu-list:visited {
+    color: rgba(58, 61, 66, 0.8);
+} 
+
+.icon {
+    position: absolute;
+    font-size: 25px;
+    padding-left: 10px;
+    color: rgba(58, 61, 66, 0.8);
+}
+
+.icon:visited {
+    color: #3A3D42!important;
+}
