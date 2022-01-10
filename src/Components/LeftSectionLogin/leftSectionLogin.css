@@ -1,0 +1,28 @@
+.left-section-page {
+    width: 50%;
+    height: 100vh;
+    padding-left: 150px;
+    padding-top: 50px;
+    background-image: url(./../../images/bg-left.svg);
+    color: #FFFFFF;
+}
+
+.top-left-title {
+    font-weight: bold;
+    font-size: 29px;
+    line-height: 40px;
+}
+
+.bottom-left-title {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 33px;
+}
+
+.bottom-left-parag {
+    width: 80%;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 23px;
+    color: rgba(255, 255, 255, 0.8);
+}
