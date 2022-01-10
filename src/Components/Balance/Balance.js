@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './balance.css'
 
 function Balance(props) {
@@ -8,14 +9,30 @@ function Balance(props) {
                 <h2 className="balance-title">
                     Balance
                 </h2>
-                <a href="./transaction-detail.html">
                     <h2 className="balance-amount">
-                        {props.balance}
+                        Rp. {props.balance}
                     </h2>
-                </a>
                 <p className="phone-number">
-                    {props.phone_number}
+                    +62 {props.phone_number}
                 </p>
+            </div>
+            <div className="col d-flex flex-column justify-content-center align-items-end">
+                <Link to='/transfer' style={{textDecoration : 'none'}} >
+                    <button type="button" class="balance-btn btn btn-primary d-flex justify-content-center align-items-center">
+                        <i class="icon-balance fas fa-arrow-up"></i>
+                        <h2 class="balance-title px-3 m-0">
+                            Transfer
+                        </h2>
+                    </button>
+                </Link>
+                <Link to='/' style={{textDecoration : 'none'}} >
+                    <button type="button" class="balance-btn btn btn-primary d-flex justify-content-center align-items-center">
+                        <i className="icon-balance fas fa-plus"></i>
+                        <h2 class="balance-title px-3 m-0">
+                            Top Up
+                        </h2>
+                    </button>
+                </Link>
             </div>
         </div>
     )
