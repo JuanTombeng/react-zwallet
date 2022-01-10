@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
-import './signup.css'
 import leftBackground from '../../images/bg-app.svg'
-import Input from './../../Components/Input/Input'
+import Input from '../../Components/Input/Input'
 import Button from '../../Components/Button/index'
+import LeftSectionLogin from '../../Components/LeftSectionLogin/index'
+import '../Login/loginPage.css'
 
 const Signup = () => {
     const [form, setForm] = useState({
@@ -35,63 +36,52 @@ const Signup = () => {
         }).catch((err) => {
             setLoading(false)
             console.log(err.message)
-            if(err.response.status === 500){
-                setErrorMessage(err.response.data.message)
-            }else{
-                setErrorMessage('maaf ganguan')
-            }
+            setErrorMessage(err.response.data.message)
         })
 
     }
     return (
-        <div className="container d-flex flex-fill">
-            <section className="left-container">
-                <div className="top-left-title">Zwallet</div>
-                <img className='bg-app' src={leftBackground} alt="" width="500" />
-                <h2 className="bottom-left-title">App that Covering Banking Needs.</h2>
-                <p className="bottom-left-parag">Zwallet is an application that focussing in banking needs for all users
-                in the world. Always updated and always following world trends.
-                5000+ users registered in Zwallet everyday with worldwide
-                users coverage.</p>
-            </section>
-            <section className="right-container d-flex flex-column">
-                <h2 className="top-right-title">
-                Start Accessing Banking Needs
-                With All Devices and All Platforms
-                With 30.000+ Users
+        <div className="Login-Page d-flex">
+            <LeftSectionLogin />
+            <div className="right-section-page">
+                <h2 className="top-right-title mb-4">
+                    Start Accessing Banking Needs
+                    With All Devices and All Platforms
+                    With 30.000+ Users
                 </h2>
-                <p className="top-right-parag">
-                Transfering money is eassier than ever, you can access Zwallet wherever you are. 
-                Desktop, laptop, mobile phone? we cover all of that for you!
+                <p className="top-right-parag mb-4">
+                    Transfering money is eassier than ever, you can access Zwallet wherever you are. 
+                    Desktop, laptop, mobile phone? we cover all of that for you!
                 </p>
-                <Input
+                <Input className='form-search' icon='icon fas fa-user'
                     onChange={handleChangeForm}
                     name="username"
                     value={form.username}
-                    type="email"
-                    placeholder="Enter Your usename"
+                    type="text"
+                    placeholder="Enter Your username"
                 />
-                <Input
+                <Input className='form-search' icon='icon-email far fa-envelope'
                     onChange={handleChangeForm}
                     name="email"
                     value={form.email}
                     type="email"
                     placeholder="Enter Your e-mail"
                 />
-                <Input
+                <Input className='form-search' icon='icon-email fas fa-lock'
                     onChange={handleChangeForm}
                     name="password"
                     value={form.password}
                     type="password"
                     placeholder="Enter Your password"
                 />
-                <Button isLoading={loading} onClick={handleClick} className='form-button d-flex align-items-center justify-content-center'>Sign Up</Button>
-                <div className="sign-up-parag">
+                
+                <div className="sign-up-parag d-flex flex-column align-items-center">
+                    {errorMessage && <h1 className="text-error">{errorMessage}</h1>}
+                    <Button isLoading={loading} onClick={handleClick} className='form-button d-flex align-items-center justify-content-center'>Sign Up</Button>
                     <p class="auth-form-label">Already have an account? <Link to="/login"> Login </Link></p>
                 </div>
-                {errorMessage ? alert(alert) : null}
-            </section>
-        </div>  
+            </div>
+        </div>
     )
 }
 
