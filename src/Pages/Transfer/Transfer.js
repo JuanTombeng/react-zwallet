@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link, useSearchParams, Navigate  } from 'react-router-dom'
 import axios from 'axios'
 import defaultProfile from '../../images/default.jpg'
 import pic0 from '../../images/tf-0.svg'
@@ -23,27 +23,85 @@ const Transfer = () => {
         displayName : '',
         phoneNumber : ''
     })
+    const [contactList, setContactList] = useState([])
     const [errorMessage, setErrorMessage] = useState('')
+    const navigate = useNavigate()
+    const [searchParams, setSearchParams] = useSearchParams();
+    const querySearch = searchParams.get("search");
 
     useEffect(() => {
-        const fetchData = async () => {
-            const profileData = await axios.get(`https://zwallet-app.herokuapp.com/users/${userId}`)
-            .then((res) => {
-                setLoading(false)
-                const result = res.data
-                setHeaderProfile({
-                    displayName : `${result.data[0].first_name} ${result.data[0].last_name}`,
-                    phoneNumber : result.data[0].phone_number
+        if (querySearch) {
+            const fetchData = async () => {
+                const profileData = await axios.get(`https://zwallet-app.herokuapp.com/users/${userId}`)
+                .then((res) => {
+                    setLoading(false)
+                    const result = res.data
+                    setHeaderProfile({
+                        displayName : `${result.data[0].first_name} ${result.data[0].last_name}`,
+                        phoneNumber : result.data[0].phone_number
+                    })
                 })
-            })
-            .catch((err) => {
-                setLoading(false)
-                console.log(err.message)
-                setErrorMessage(err.response.data.message)
-            })
+                .catch((err) => {
+                    setLoading(false)
+                    console.log(err.message)
+                    setErrorMessage(err.response.data.message)
+                })
+                const contactListData = await axios.get(`https://zwallet-app.herokuapp.com/users/?name=${querySearch}&limit=3`)
+                .then((res) => {
+                    setLoading(false)
+                    const result = res.data.data
+                    setContactList(result)
+                })
+                .catch((err) => {
+                    setLoading(false)
+                    console.log(err.message)
+                    setErrorMessage(err.response.data.message)
+                })
+            }
+            fetchData()
+        } else {
+            const fetchData = async () => {
+                const profileData = await axios.get(`https://zwallet-app.herokuapp.com/users/${userId}`)
+                .then((res) => {
+                    setLoading(false)
+                    const result = res.data
+                    setHeaderProfile({
+                        displayName : `${result.data[0].first_name} ${result.data[0].last_name}`,
+                        phoneNumber : result.data[0].phone_number
+                    })
+                })
+                .catch((err) => {
+                    setLoading(false)
+                    console.log(err.message)
+                    setErrorMessage(err.response.data.message)
+                })
+                const contactListData = await axios.get(`https://zwallet-app.herokuapp.com/users/?limit=3`)
+                .then((res) => {
+                    setLoading(false)
+                    const result = res.data.data
+                    setContactList(result)
+                })
+                .catch((err) => {
+                    setLoading(false)
+                    console.log(err.message)
+                    setErrorMessage(err.response.data.message)
+                })
+            }
+            fetchData()
         }
-        fetchData()
-    }, [])
+    }, [querySearch])
+    
+    const handleSearch = (e) => {
+        if (e.key === 'Enter' )
+        setSearchParams({
+            search : e.target.value
+        })
+    }
+
+    const handleClearSearchBar = () => {
+        setSearchParams()
+
+    }
 
     return (
         <div className='Transfer'>
@@ -55,12 +113,15 @@ const Transfer = () => {
                         <h2 className="content-title mb-3">
                             Search Receiver
                         </h2>
-                        <Input className='form-search' icon='search-icon fas fa-search' placeholder='Search receiver here'/>
-                        <Link to='transfer-confirm' style={{textDecoration : 'none'}}>
-                            <Card image={pic1} first_name='Samuel Suhi' transaction_type='+62 813-8492-9994'/>
-                        </Link>
-                        <Card image={pic2} first_name='Momo Taro' transaction_type='+62 813-8492-9994'/>
-                        <Card image={pic3} first_name='Jessica Keen' transaction_type='+62 813-8492-9994'/>
+                        <Input name="search" className='form-search' icon='search-icon fas fa-search' 
+                        closeIcon='close-icon far fa-times-circle'
+                        placeholder='Search receiver here'
+                        onClick={handleClearSearchBar} 
+                        onKeyUp={handleSearch} />
+                        {contactList.map((contact) => {
+                            return <Card image={defaultProfile} first_name={contact.first_name} last_name={contact.last_name}
+                            transaction_type={contact.phone_number} onClick={() => navigate(`/transfer/transfer-input/${contact.id}`)}/>
+                        })}
                     </div>
                 </div>
             </Main>
