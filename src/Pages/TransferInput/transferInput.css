@@ -1,0 +1,119 @@
+.transfer-input {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.input-section {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    padding: 30px;
+}
+
+.content-wrapper {
+    height: 100%;
+    width: 100%;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 25px;
+    padding: 30px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* .details-section {
+
+} */
+
+/* input form note area */
+
+.input-form-note {
+    width: 100%;
+    height: 2rem;
+    outline: 0;
+    border: none;
+    border-bottom: 2px solid rgba(169, 169, 169, 0.8);
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 23px;
+    padding-left: 3rem;
+}
+
+.input-form-note::placeholder {
+    color: rgba(169, 169, 169, 0.8);
+}
+
+.input-form-note:focus {
+    border-bottom: 2px solid #4b5dc0;
+}
+
+.input-form-note:focus + .note-icon {
+    color: #4b5dc0;
+}
+
+.note-icon {
+    position: relative;
+    padding-left: 15px;
+    font-size: 20px;
+    color: rgba(169, 169, 169, 0.8);
+    transform: translate(30px, 5px);
+}
+
+/* input form note area end */
+
+/* input nominal area start */
+
+.input-nominal {
+    width: 100%;
+    font-weight: bold;
+    font-size: 42px;
+    line-height: 56px;
+    border: none;
+    text-align: center;
+    color: #6379F4;
+}
+.input-nominal::placeholder {
+    color: #B5BDCC;
+}
+
+.input-nominal:focus {
+    outline: none;
+}
+
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+-webkit-appearance: none; 
+margin: 0; 
+}
+
+.input-amount-status {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+    color: #3A3D42;
+}
+
+
+.form-button {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 1rem;
+    font-size: 18px;
+    background-color: #6379F4;
+    color: #FFF;
+    font-weight: 700;
+    cursor: pointer;
+    }
+    
+    
+    .form-button:hover {
+        background-color:#4b5dc0;
+        color: #fff;
+    }
+
+/* imput nominal area end */
