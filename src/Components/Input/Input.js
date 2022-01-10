@@ -6,6 +6,7 @@ const Input = (props) => {
        <Fragment>
             <i className={props.icon}></i>
             <input className='input' {...props}  placeholder={props.placeholder}/>
+            <i className={props.closeIcon} onClick={props.onClick} onChange={props.onChange}></i>
        </Fragment>
     )
 }

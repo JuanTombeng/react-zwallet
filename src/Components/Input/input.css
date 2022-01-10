@@ -20,6 +20,13 @@
     font-size: 20px;
 }
 
+.close-icon {
+    position: absolute;
+    font-size: 20px;
+    transform: translate(-35px, 15px);
+    cursor: pointer;
+}
+
 .icon {
     position: absolute;
     padding: 1rem;
