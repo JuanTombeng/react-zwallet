@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
-import './login.css'
 import leftBackground from '../../images/bg-app.svg'
-import Input from './../../Components/Input/Input'
+import Input from '../../Components/Input/Input'
 import Button from '../../Components/Button/index'
+import LeftSectionLogin from '../../Components/LeftSectionLogin/index'
+import './loginPage.css'
 
-const Login = () => {
+const LoginPage = () => {
+
     const [form, setForm] = useState({
         email : '',
         password : ''
     })
+    // const [userId, setUserId] = useState('')
     const [loading, setLoading] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const navigate = useNavigate()
@@ -46,18 +49,11 @@ const Login = () => {
         })
 
     }
+
     return (
-        <div className="container d-flex flex-fill">
-            <section className="left-container d-flex flex-column">
-                <div className="top-left-title">Zwallet</div>
-                <img className='bg-app' src={leftBackground} alt="" width="500" />
-                <h2 className="bottom-left-title mb-3">App that Covering Banking Needs.</h2>
-                <p className="bottom-left-parag">Zwallet is an application that focussing in banking needs for all users
-                in the world. Always updated and always following world trends.
-                5000+ users registered in Zwallet everyday with worldwide
-                users coverage.</p>
-            </section>
-            <section className="right-container d-flex flex-column">
+        <div className="Login-Page d-flex">
+            <LeftSectionLogin />
+            <div className="right-section-page">
                 <h2 className="top-right-title mb-4">
                     Start Accessing Banking Needs
                     With All Devices and All Platforms
@@ -67,29 +63,29 @@ const Login = () => {
                     Transfering money is eassier than ever, you can access Zwallet wherever you are. 
                     Desktop, laptop, mobile phone? we cover all of that for you!
                 </p>
-                <Input
+                <Input className='form-search' icon='icon far fa-envelope'
                     onChange={handleChangeForm}
                     name="email"
                     value={form.email}
                     type="email"
                     placeholder="Enter Your e-mail"
-                    icon='icon-email far fa-envelope'
                 />
-                <Input
+                <Input className='form-search' icon='icon-email fas fa-lock'
                     onChange={handleChangeForm}
                     name="password"
                     value={form.password}
                     type="password"
                     placeholder="Enter Your password"
                 />
-                {errorMessage && <h1 className="text-error">{errorMessage}</h1>}
-                <Button isLoading={loading} onClick={handleClick} className='form-button d-flex align-items-center justify-content-center'>Login</Button>
-                <div className="sign-up-parag">
+                
+                <div className="sign-up-parag d-flex flex-column align-items-center">
+                    {errorMessage && <h1 className="text-error">{errorMessage}</h1>}
+                    <Button isLoading={loading} onClick={handleClick} className='form-button d-flex align-items-center justify-content-center'>Login</Button>
                     <p class="auth-form-label">Don’t have an account? <Link to="/signup"> Sign Up </Link></p>
                 </div>
-            </section>
-        </div>  
+            </div>
+        </div>
     )
 }
 
-export default Login
+export default LoginPage
