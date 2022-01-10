@@ -3,7 +3,7 @@ import './card.css'
 
 function Card(props) {
     return (
-        <div className='Card'>
+        <div className='Card' onClick={props.onClick}>
             <div className="row box p-3 m-md-2 p-md-3 d-flex align-items-center">
                 <div className="col col-3 col-md-2 col-lg-1 g-0 d-flex justify-content-center">
                     <img src={props.image} className="user-picture" alt="" />
