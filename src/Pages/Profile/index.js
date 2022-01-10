@@ -13,6 +13,7 @@ import Card from '../../Components/Card/Card'
 
 const Profile = () => {
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();
     const [userId, setUserId] = useState(() => {
         const data = localStorage.getItem('userId')
         const initialValue = JSON.parse(data)
@@ -49,32 +50,61 @@ const Profile = () => {
             }
             fetchData()
     }, [])
+
+    const handleLogOut = () => {
+        localStorage.removeItem("auth");
+        localStorage.removeItem("accountId");
+        localStorage.removeItem("userId");
+        navigate("/login");
+    }
     return (
-        <div className='Profile d-flex'>
-            <div className="container-profile d-flex flex-column">
+        <div className='Profile'>
                 <Header display_name={headerProfile.displayName} phone_number={headerProfile.phoneNumber} />
                 <Main>
                     <Navbar />
-                    <div className="profile-section d-flex justify-items-center">
-                        <div className="content-wrapper d-flex">
-                            <div className="middle-content d-flex justify-content-center flex-column">
-                                <div className="upper-section d-flex justify-content-center flex-column">
-                                    <img src={defaultProfile} className="user-picture d-flex justify-content-center" alt="" />
-                                    <div className="edit-section d-flex d-flex justify-content-center">
-                                        <img src={vector} className="icon" alt="" />
-                                        <p className="edit-title">Edit</p>
-                                    </div>
-                                </div>
-                                <div className="lower-section d-flex">
-
-                                </div>
+                    <div className="profile-section profile-content d-flex flex-column justify-content-center align-items-center">
+                        <section className="content-wrapper d-flex flex-column align-items-center justify-content-center">
+                            <div className="profile-img d-flex justify-content-center">
+                                <img
+                                src={defaultProfile}
+                                className="user-pic mt-3"
+                                height="76px"
+                                alt="Users"
+                                />
                             </div>
-                        </div>
+                            <div className="profile-edit d-flex flex-row justify-content-center align-items-center ">
+                                <i className="pen-edit fas fa-pen"></i>
+                                <p className="text-edit text-grey ms-1 mt-3">Edit</p>
+                            </div>
+
+                            <div className="profile-name d-flex flex-column align-items-center">
+                                <p className="profile-user-name">{headerProfile.displayName}</p>
+                                <p className="profile-user-phone">{headerProfile.phoneNumber}</p>
+                            </div>
+
+                            <div className="profile-manager d-flex flex-row justify-content-between">
+                                <p className="profile-manager-option">
+                                Personal Information
+                                </p>
+                                <i className="profile-arrow-icon fas fa-arrow-right"></i>
+                            </div>
+                            <div className="profile-manager d-flex flex-row justify-content-between">
+                                <p className="profile-manager-option">Change Password</p>
+                                <i className="profile-arrow-icon fas fa-arrow-right"></i>
+                            </div>
+                            <div className="profile-manager d-flex flex-row justify-content-between">
+                                <p className="profile-manager-option">Change PIN</p>
+                                <i className="profile-arrow-icon fas fa-arrow-right"></i>
+                            </div>
+                            <div
+                                onClick={handleLogOut}
+                                className="profile-manager d-flex flex-row justify-content-between">
+                                <p className="profile-manager-option">Log Out</p>
+                            </div>
+                        </section>
                     </div>
-                    
                 </Main>
-                <Footer />
-            </div>
+            <Footer />
         </div>
     )
 }
