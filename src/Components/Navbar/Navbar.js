@@ -8,25 +8,25 @@ function Navbar(props) {
             <div className="row d-flex">
                 <Link to='/' style={{textDecoration : 'none'}} >
                     <div className="col mt-4 mb-4 d-flex">
-                        <i className="icon fas fa-th-large"></i>
+                        <i className="icon-list fas fa-th-large"></i>
                         <li className="menu-list d-none d-lg-block">Dashboard</li>
                     </div>
                 </Link>
                 <Link to='/transfer' style={{textDecoration : 'none'}}>
                     <div className="col mt-4 mb-4 d-flex">
-                        <i className="icon fas fa-arrow-up"></i>
+                        <i className="icon-list fas fa-arrow-up"></i>
                         <li className="menu-list d-none d-lg-block">Transfer</li>
                     </div>
                 </Link>
                 <Link to='/' style={{textDecoration : 'none'}}>
                     <div className="col mt-4 mb-4 d-flex">
-                        <i className="icon fas fa-plus"></i>
+                        <i className="icon-list fas fa-plus"></i>
                         <li className="menu-list d-none d-lg-block">Top Up</li>
                     </div>
                 </Link>
                 <Link to='/profile' style={{textDecoration : 'none'}} >
                 <div className="col mt-4 mb-4 d-flex">
-                    <i className="icon far fa-user"></i>
+                    <i className="icon-list far fa-user"></i>
                     <li className="menu-list d-none d-lg-block">Profile</li>
                 </div>
                 </Link>
@@ -34,7 +34,7 @@ function Navbar(props) {
             <div className="row d-flex">
                 <Link to='/login' onClick={props.onClick} style={{textDecoration : 'none'}} >
                     <div className="col mt-4 mb-4 d-flex">
-                        <i className="icon fas fa-sign-out-alt"></i>
+                        <i className="icon-list fas fa-sign-out-alt"></i>
                         <li className="menu-list d-none d-lg-block">Log Out</li>
                     </div>
                 </Link>
