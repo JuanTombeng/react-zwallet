@@ -25,7 +25,7 @@
 
 .content-wrapper::-webkit-scrollbar {
     display: none;
-  }
+}
 
 .content-title {
     font-weight: bold;
