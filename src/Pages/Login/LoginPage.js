@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
-import leftBackground from '../../images/bg-app.svg'
 import Input from '../../Components/Input/Input'
 import Button from '../../Components/Button/index'
 import LeftSectionLogin from '../../Components/LeftSectionLogin/index'
+import {userContext} from '../../Context/UserContext'
 import './loginPage.css'
 
 const LoginPage = () => {
@@ -13,8 +13,8 @@ const LoginPage = () => {
         email : '',
         password : ''
     })
-    // const [userId, setUserId] = useState('')
     const [loading, setLoading] = useState(false)
+    const {user, setUser} = useContext(userContext)
     const [errorMessage, setErrorMessage] = useState('')
     const navigate = useNavigate()
     const handleChangeForm = (e) => {
@@ -24,28 +24,27 @@ const LoginPage = () => {
         })
     }
     const handleClick = () => {
-        setLoading(true)
-        axios.post('https://zwallet-app.herokuapp.com/users/login', {
-            email: form.email,
-            password : form.password
-        }).then((res) => {
+        setLoading(false)
+        axios({
+            baseURL: `${process.env.REACT_APP_URL_BACKEND}`,
+            data : {
+                email : form.email,
+                password : form.password
+            },
+            method : 'POST',
+            url : `/users/login`
+        })
+        .then((res) => {
             setLoading(false)
-            const result = res.data
-            const userId =  result.data[0].id
-            const accountId = result.data[0].id_account
-            console.log(result.data)
-            localStorage.setItem('auth', "1")
-            localStorage.setItem('accountId', JSON.stringify(accountId))
-            localStorage.setItem('userId', JSON.stringify(userId))
+            const result = res.data.data[0]
+            localStorage.setItem('auth', '1')
+            localStorage.setItem('userId', JSON.stringify(result.id))
             navigate('/')
-        }).catch((err) => {
+        })
+        .catch((err) => {
             setLoading(false)
-            console.log(err.message)
-            if(err.response.status === 500){
-                setErrorMessage(err.response.data.message)
-            }else{
-                setErrorMessage('maaf ganguan')
-            }
+            console.log(err.message);
+            setErrorMessage(err.response.message)
         })
 
     }
@@ -81,7 +80,7 @@ const LoginPage = () => {
                 <div className="sign-up-parag d-flex flex-column align-items-center">
                     {errorMessage && <h1 className="text-error">{errorMessage}</h1>}
                     <Button isLoading={loading} onClick={handleClick} className='form-button d-flex align-items-center justify-content-center'>Login</Button>
-                    <p class="auth-form-label">Don’t have an account? <Link to="/signup"> Sign Up </Link></p>
+                    <p className="auth-form-label">Don’t have an account? <Link to="/signup"> Sign Up </Link></p>
                 </div>
             </div>
         </div>
