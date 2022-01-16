@@ -18,17 +18,17 @@ function Balance(props) {
             </div>
             <div className="col d-flex flex-column justify-content-center align-items-end">
                 <Link to='/transfer' style={{textDecoration : 'none'}} >
-                    <button type="button" class="balance-btn btn btn-primary d-flex justify-content-center align-items-center">
-                        <i class="icon-balance fas fa-arrow-up"></i>
-                        <h2 class="balance-title px-3 m-0">
+                    <button type="button" className="balance-btn btn btn-primary d-flex justify-content-center align-items-center">
+                        <i className="icon-balance fas fa-arrow-up"></i>
+                        <h2 className="balance-title px-3 m-0">
                             Transfer
                         </h2>
                     </button>
                 </Link>
                 <Link to='/' style={{textDecoration : 'none'}} >
-                    <button type="button" class="balance-btn btn btn-primary d-flex justify-content-center align-items-center">
+                    <button type="button" className="balance-btn btn btn-primary d-flex justify-content-center align-items-center">
                         <i className="icon-balance fas fa-plus"></i>
-                        <h2 class="balance-title px-3 m-0">
+                        <h2 className="balance-title px-3 m-0">
                             Top Up
                         </h2>
                     </button>
