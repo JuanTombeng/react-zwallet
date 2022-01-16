@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import defaultProfile from '../../images/default.jpg'
 import vector from '../../images/Vector.svg'
+import { userContext } from '../../Context/UserContext'
 import './profile.css'
 
 import Header from '../../Components/Header/Header'
@@ -12,45 +13,9 @@ import Navbar from '../../Components/Navbar/Navbar'
 import Card from '../../Components/Card/Card'
 
 const Profile = () => {
-    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
-    const [userId, setUserId] = useState(() => {
-        const data = localStorage.getItem('userId')
-        const initialValue = JSON.parse(data)
-        return initialValue || ""
-    })
-    const [accountId, setAccountId] = useState(() => {
-        const data = localStorage.getItem('accountId')
-        const initialValue = JSON.parse(data)
-        return initialValue || ""
-    })
-    const [headerProfile, setHeaderProfile] = useState({
-        displayName : '',
-        phoneNumber : '',
-    })
+    const {user, setUser} = useContext(userContext)
     const [errorMessage, setErrorMessage] = useState('')
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const profileData = await axios.get(`https://zwallet-app.herokuapp.com/users/${userId}`)
-                .then((res) => {
-                    setLoading(false)
-                    const result = res.data
-                    setHeaderProfile({
-                        displayName : `${result.data[0].first_name} ${result.data[0].last_name}`,
-                        phoneNumber : result.data[0].phone_number,
-                        balance : result.data[0].balance
-                    })
-                })
-                .catch((err) => {
-                    setLoading(false)
-                    console.log(err.message)
-                    setErrorMessage(err.response.data.message)
-                })
-            }
-            fetchData()
-    }, [])
-
     const handleLogOut = () => {
         localStorage.removeItem("auth");
         localStorage.removeItem("accountId");
@@ -59,7 +24,7 @@ const Profile = () => {
     }
     return (
         <div className='Profile'>
-                <Header display_name={headerProfile.displayName} phone_number={headerProfile.phoneNumber} />
+                <Header display_name={user ? `${user.first_name} ${user.last_name}` : `Profile Name`} phone_number={user ? user.phone_number : `Phone Number`} />
                 <Main>
                     <Navbar />
                     <div className="profile-section profile-content d-flex flex-column justify-content-center align-items-center">
@@ -78,8 +43,8 @@ const Profile = () => {
                             </div>
 
                             <div className="profile-name d-flex flex-column align-items-center">
-                                <p className="profile-user-name">{headerProfile.displayName}</p>
-                                <p className="profile-user-phone">{headerProfile.phoneNumber}</p>
+                                <p className="profile-user-name">{user ? `${user.first_name} ${user.last_name}` : `Display Name`}</p>
+                                <p className="profile-user-phone">{user ? user.phone_number : `Phone Number`}</p>
                             </div>
 
                             <div className="profile-manager d-flex flex-row justify-content-between">

@@ -11,7 +11,8 @@ const Signup = () => {
     const [form, setForm] = useState({
         username : '',
         email : '',
-        password : ''
+        password : '',
+        pin : ''
     })
     const [loading, setLoading] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
@@ -23,22 +24,7 @@ const Signup = () => {
         })
     }
     const handleClick = () => {
-        setLoading(true)
-        axios.post('https://zwallet-app.herokuapp.com/users/signup', {
-            username : form.username,
-            email: form.email,
-            password : form.password
-        }).then((res) => {
-            setLoading(false)
-            const result = res.data
-            console.log(result)
-            navigate('/')
-        }).catch((err) => {
-            setLoading(false)
-            console.log(err.message)
-            setErrorMessage(err.response.data.message)
-        })
-
+        navigate(`/create-pin`, { state : {...form}})
     }
     return (
         <div className="Login-Page d-flex">
@@ -78,7 +64,7 @@ const Signup = () => {
                 <div className="sign-up-parag d-flex flex-column align-items-center">
                     {errorMessage && <h1 className="text-error">{errorMessage}</h1>}
                     <Button isLoading={loading} onClick={handleClick} className='form-button d-flex align-items-center justify-content-center'>Sign Up</Button>
-                    <p class="auth-form-label">Already have an account? <Link to="/login"> Login </Link></p>
+                    <p className="auth-form-label">Already have an account? <Link to="/login"> Login </Link></p>
                 </div>
             </div>
         </div>
