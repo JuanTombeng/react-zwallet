@@ -13,6 +13,7 @@ import RequireAuth from "./Components/RequireAuth";
 import LoginPage from './Pages/Login/LoginPage'
 import ManagePhoneNumber from "./Pages/PhoneNumber/ManagePhoneNumber";
 import CreatePin from './Pages/Pins/CreatePin'
+import TransferSuccess from "./Pages/TransferSuccess/TransferSuccess";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="transfer" element={<RequireAuth><Transfer /></RequireAuth>} />
           <Route path="/transfer/transfer-input/:id" element={<RequireAuth><TransferInput /></RequireAuth>} />
           <Route path="/transfer/transfer-confirm/:id" element={<RequireAuth><TransferConfirmation /></RequireAuth>} />
+          <Route path="/transfer/transfer-success/:id" element={<RequireAuth><TransferSuccess /></RequireAuth>} />
           <Route path="profile" element={<RequireAuth><Profile /></RequireAuth>} />
           <Route path="manage-phone" element={<RequireAuth><ManagePhoneNumber /></RequireAuth>} />
         </Routes>

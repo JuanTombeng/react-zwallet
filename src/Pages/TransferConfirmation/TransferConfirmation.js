@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import axios from 'axios'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import defaultProfile from '../../images/default.jpg'
 import {userContext} from '../../Context/UserContext'
@@ -53,7 +54,31 @@ function TransferConfirmation() {
     const matchingPin = () => {
         if (user) {
             if (user.pin === parseInt(pin.join(''))) {
+                console.log(user.id)
+                console.log(id)
+                console.log(state.amount)
+                console.log(state.transaction_type)
+                console.log(state.notes)
+                axios({
+                    baseURL : process.env.REACT_APP_URL_BACKEND,
+                    data : {
+                        from_user_id : user.id,
+                        to_user_id : id,
+                        amount : state.amount,
+                        transaction_type : state.transaction_type,
+                        notes : state.notes,
+                    },
+                    method : 'POST',
+                    url : `/transactions/`
+                })
+                .then((res) => {
+                const result = res.data.data
                 alert('Pin is confirmed!')
+                navigate(`/transfer/transfer-success/${id}`)
+                })
+                .catch((err) => {
+                    console.log(err.message)
+                })
             } else {
                 alert('Pin is Incorrect!')
             }
