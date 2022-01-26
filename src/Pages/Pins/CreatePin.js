@@ -8,6 +8,7 @@ import './pin.css'
 
 const CreatePin = () => {
     const [loading, setLoading] = useState(false)
+    const [afterMessage, setAfterMessage] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const navigate = useNavigate()
     // const [pin, setPin] = useState([])
@@ -59,7 +60,7 @@ const CreatePin = () => {
     const handleConfirmClick = () => {
         if (user) {
             axios({
-                baseURL : process.env.REACT_APP_URL_BACKEND,
+                baseURL : `http://localhost:4000`,
                 data : {
                     username : user.username,
                     email : user.email,
@@ -73,7 +74,8 @@ const CreatePin = () => {
                 setLoading(false)
                 const result = res.data.data
                 console.log(result)
-                navigate('/login')
+                // navigate('/login')
+                setAfterMessage(`We have send you a verification email. Please verify your account.`)
             })
             .catch((err) => {
                 setLoading(false)
@@ -121,6 +123,7 @@ const CreatePin = () => {
                         <Button onClick={handleConfirmClick} children='Confirm'
                         className='form-button d-flex align-items-center justify-content-center'>Confirm</Button>
                     </div>
+                    {afterMessage && <h1 className="text-error">{afterMessage}</h1>}
                 </div>
             </div>
         </div>
