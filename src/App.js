@@ -20,20 +20,11 @@ const App = () => {
     <UserContext>
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={
-          <Home/>
-          }/> */}
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<Signup />} />
           <Route path="create-pin" element={<CreatePin />} />
           <Route path="/" element={<RequireAuth> <Home /> </RequireAuth>} />
-          <Route path="history" element={<RequireAuth><TransactionHistory /></RequireAuth>} />
-          <Route path="transfer" element={<RequireAuth><Transfer /></RequireAuth>} />
-          <Route path="/transfer/transfer-input/:id" element={<RequireAuth><TransferInput /></RequireAuth>} />
-          <Route path="/transfer/transfer-confirm/:id" element={<RequireAuth><TransferConfirmation /></RequireAuth>} />
-          <Route path="/transfer/transfer-success/:id" element={<RequireAuth><TransferSuccess /></RequireAuth>} />
           <Route path="profile" element={<RequireAuth><Profile /></RequireAuth>} />
-          <Route path="manage-phone" element={<RequireAuth><ManagePhoneNumber /></RequireAuth>} />
         </Routes>
       </BrowserRouter>
     </UserContext>
