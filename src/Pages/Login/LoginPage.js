@@ -37,9 +37,10 @@ const LoginPage = () => {
         .then((res) => {
             setLoading(false)
             const result = res.data.data[0]
-            localStorage.setItem('auth', '1')
-            localStorage.setItem('userId', JSON.stringify(result.id))
+            console.log(result)
             navigate('/')
+            // localStorage.setItem('auth', '1')
+            // localStorage.setItem('userId', JSON.stringify(result.id))
         })
         .catch((err) => {
             setLoading(false)

@@ -60,7 +60,7 @@ const CreatePin = () => {
     const handleConfirmClick = () => {
         if (user) {
             axios({
-                baseURL : `http://localhost:4000`,
+                baseURL : `http://localhost:4000/v1`,
                 data : {
                     username : user.username,
                     email : user.email,
@@ -74,7 +74,6 @@ const CreatePin = () => {
                 setLoading(false)
                 const result = res.data.data
                 console.log(result)
-                // navigate('/login')
                 setAfterMessage(`We have send you a verification email. Please verify your account.`)
             })
             .catch((err) => {
