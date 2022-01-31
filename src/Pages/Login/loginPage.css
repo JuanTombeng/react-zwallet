@@ -1,13 +1,14 @@
 .Login-Page {
-    width: 100%;
+    width: 80%;
     height: 100vh;
+    margin: auto;
 }
 
 .right-section-page {
     width: 50%;
     height: 100vh;
-    padding: 50px 200px 0 50px ;
     box-sizing: border-box;
+    padding: 50px;
 }
 
 /* ---- */

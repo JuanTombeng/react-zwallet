@@ -5,12 +5,15 @@ export const userContext = createContext(null);
 const UserContext = ({children}) => {
     const [user, setUser] = useState(null)
     useEffect(() => {
-        const userId = JSON.parse(localStorage.getItem('userId'))
-        if (userId) {
+        const token = JSON.parse(localStorage.getItem('token'))
+        if (token) {
             axios({
-                baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
+                baseURL : `http://localhost:4000/v2`,
                 method: 'GET',
-                url : `/users/${userId}`
+                url : `users/details`,
+                headers : {
+                    'Authorization': `Bearer ${token}`
+                }
             })
             .then((res) => {
                 const result = res.data.data[0]
@@ -21,7 +24,6 @@ const UserContext = ({children}) => {
             })
         }
     }, [])
-    console.log(user)
     return (
         <userContext.Provider value={{ user, setUser }}>
             {children}

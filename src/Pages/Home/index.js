@@ -32,24 +32,24 @@ const Home = () => {
     const [transactionHistory, setTransactionHistory] = useState([])
     const [errorMessage, setErrorMessage] = useState('')
 
-    useEffect(() => {
-        axios({
-            baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
-            method : 'GET',
-            url : `/transactions/history/${userId}`
-        }).then((res) => {
-            setLoading(false)
-            const result = res.data.data
-            setTransactionHistory(result)
-        }).catch((err) => {
-            setLoading(false)
-            setErrorMessage(err.response.data.message)
-        })
-    }, [])
+    // useEffect(() => {
+    //     axios({
+    //         baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
+    //         method : 'GET',
+    //         url : `/transactions/history/${userId}`
+    //     }).then((res) => {
+    //         setLoading(false)
+    //         const result = res.data.data
+    //         setTransactionHistory(result)
+    //     }).catch((err) => {
+    //         setLoading(false)
+    //         setErrorMessage(err.response.data.message)
+    //     })
+    // }, [])
     
     const handleLogout = () => {
         localStorage.removeItem("auth");
-        localStorage.removeItem("userId");
+        localStorage.removeItem("token");
         navigate("/login");
     };
     return (
