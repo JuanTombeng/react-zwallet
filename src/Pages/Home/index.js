@@ -55,7 +55,7 @@ const Home = () => {
     return (
         <div className='Home d-flex'>
             <div className="container-home d-flex flex-column">
-                <Header display_name={user ? `${user.first_name} ${user.last_name}` : `Profile Name`} phone_number={user ? user.phone_number : `Phone Number`} />
+                <Header display_name={user ? `${user.first_name} ${user.last_name}` : `Profile Name`} phone_number={user ? user.phone_number : `Phone Number`} profile_picture={user ? user.profile_picture : defaultProfile} />
                 <Main>
                     <Navbar onClick={handleLogout} />
                     <div className="main-section d-flex flex-column">
