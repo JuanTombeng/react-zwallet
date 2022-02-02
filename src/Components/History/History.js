@@ -15,7 +15,9 @@ function History({children}) {
                     </h2>
                 </Link>
             </div>
-            {children}
+            <div className="card-list-wrapper">
+                {children}
+            </div>
         </div>
     )
 }
