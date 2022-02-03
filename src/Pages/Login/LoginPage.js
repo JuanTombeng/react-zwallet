@@ -32,7 +32,7 @@ const LoginPage = () => {
                     password : form.password
                 },
                 method : 'POST',
-                url : `v2/users/login`
+                url : `/v2/users/login`
             })
             .then((res) => {
                 setLoading(false)

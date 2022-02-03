@@ -40,7 +40,7 @@ const CreatePin = () => {
                             pin : user.pin
                         },
                         method : 'POST',
-                        url : 'v2/users/signup'
+                        url : '/v2/users/signup'
                     })
                     .then((res) => {
                         setLoading(false)

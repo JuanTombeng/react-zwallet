@@ -31,7 +31,7 @@ const Home = () => {
     axios({
       baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
       method: "GET",
-      url: `v2/transactions/transaction-history/`,
+      url: `/v2/transactions/transaction-history/`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

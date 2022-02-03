@@ -50,7 +50,7 @@ const Profile = () => {
             baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
             data : profilePictureData,
             method : 'POST',
-            url : `v2/users/profile-picture`,
+            url : `/v2/users/profile-picture`,
             headers : {
                 'Authorization': `Bearer ${token}`
             }

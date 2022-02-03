@@ -10,7 +10,7 @@ const UserContext = ({children}) => {
             axios({
                 baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
                 method: 'GET',
-                url : `v2/users/details`,
+                url : `/v2/users/details`,
                 headers : {
                     'Authorization': `Bearer ${token}`
                 }
