@@ -29,9 +29,9 @@ const Home = () => {
 
   useEffect(() => {
     axios({
-      baseURL: `http://localhost:4000/v2`,
+      baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
       method: "GET",
-      url: `/transactions/transaction-history/`,
+      url: `v2/transactions/transaction-history/`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -43,13 +43,13 @@ const Home = () => {
       })
       .catch((err) => {
         setLoading(false);
-        setErrorMessage(err.response.data.message);
+        setErrorMessage(err.response.message);
       });
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("auth");
     localStorage.removeItem("token");
+    localStorage.removeItem("auth");
     navigate("/login");
   };
   return (

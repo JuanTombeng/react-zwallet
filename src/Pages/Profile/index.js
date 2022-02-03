@@ -47,10 +47,10 @@ const Profile = () => {
         profilePictureData.append('profile_picture', profilePicture)
 
         axios({
-            baseURL : `http://localhost:4000/v2`,
+            baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
             data : profilePictureData,
             method : 'POST',
-            url : `/users/profile-picture`,
+            url : `v2/users/profile-picture`,
             headers : {
                 'Authorization': `Bearer ${token}`
             }

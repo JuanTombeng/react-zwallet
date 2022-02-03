@@ -26,13 +26,13 @@ const LoginPage = () => {
             setErrorMessage('Please Fill in the Login Form')
         } else {
             axios({
-                baseURL : `http://localhost:4000/v2`,
+                baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
                 data : {
                     email : form.email,
                     password : form.password
                 },
                 method : 'POST',
-                url : `/users/login`
+                url : `v2/users/login`
             })
             .then((res) => {
                 setLoading(false)

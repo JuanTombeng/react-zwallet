@@ -8,9 +8,9 @@ const UserContext = ({children}) => {
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
             axios({
-                baseURL : `http://localhost:4000/v2`,
+                baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
                 method: 'GET',
-                url : `users/details`,
+                url : `v2/users/details`,
                 headers : {
                     'Authorization': `Bearer ${token}`
                 }

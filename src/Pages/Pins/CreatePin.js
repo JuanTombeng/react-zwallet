@@ -32,7 +32,7 @@ const CreatePin = () => {
                     setAfterMessage('Please Input your PIN')
                 } else {
                     axios({
-                        baseURL : `http://localhost:4000/v2`,
+                        baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
                         data : {
                             username : user.username,
                             email : user.email,
@@ -40,7 +40,7 @@ const CreatePin = () => {
                             pin : user.pin
                         },
                         method : 'POST',
-                        url : '/users/signup'
+                        url : 'v2/users/signup'
                     })
                     .then((res) => {
                         setLoading(false)
