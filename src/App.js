@@ -10,7 +10,7 @@ import CreatePin from './Pages/Pins/CreatePin'
 
 const App = () => {
   return (
-    <UserContext>
+    // <UserContext>
       <BrowserRouter>
         <Routes>
           <Route path="login" element={<LoginPage />} />
@@ -20,7 +20,7 @@ const App = () => {
           <Route path="profile" element={<RequireAuth><Profile /></RequireAuth>} />
         </Routes>
       </BrowserRouter>
-    </UserContext>
+    // </UserContext>
   );
 };
 

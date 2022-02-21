@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import defaultProfile from '../../images/default.jpg'
-import vector from '../../images/Vector.svg'
-import { userContext } from '../../Context/UserContext'
+// import defaultProfile from '../../images/default.jpg'
+// import vector from '../../images/Vector.svg'
+// import { userContext } from '../../Context/UserContext'
 import './profile.css'
 
 import Header from '../../Components/Header/Header'
@@ -13,13 +13,22 @@ import Navbar from '../../Components/Navbar/Navbar'
 import Card from '../../Components/Card/Card'
 import ProfilePictModal from '../../Components/ProfilePictModal/ProfilePictModal'
 
+import { useDispatch, useSelector } from "react-redux";
+import { PostProfilePicture } from "../../Redux/actions/users";
+
+
+
 const Profile = () => {
     const navigate = useNavigate();
-    const {user, setUser} = useContext(userContext)
+    // const {user, setUser} = useContext(userContext)
+    const [user, setUser] = useState(null);
+    const dispacth = useDispatch();
+    const { data, loading, error } = useSelector((state) => state.UserDetail);    
+    
     const [errorMessage, setErrorMessage] = useState('')
     const [afterMessage, setAfterMessage] = useState('')
     const [modal, setModal] = useState(false)
-    const [loading, setLoading] = useState(true)
+    // const [loading, setLoading] = useState(true)
     const [profilePicture, setProfilePicture] = useState(null)
     const token = JSON.parse(localStorage.getItem('token'))
 
@@ -46,28 +55,38 @@ const Profile = () => {
         const profilePictureData = new FormData()
         profilePictureData.append('profile_picture', profilePicture)
 
-        axios({
-            baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
-            data : profilePictureData,
-            method : 'POST',
-            url : `/v2/users/profile-picture`,
-            headers : {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        .then((res) => {
-            setLoading(false)
-            const result = res.data.data[0]
-            navigate('/profile')
-            window.location.reload()
-            alert(`Your profile picture is updated`)
-        })
-        .catch((err) => {
-            setLoading(false)
-            console.log(err.message);
-            setErrorMessage(err.response.message)
-        })
+        dispacth(PostProfilePicture(profilePictureData))
+
+        // axios({
+        //     baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
+        //     data : profilePictureData,
+        //     method : 'POST',
+        //     url : `/v2/users/profile-picture`,
+        //     headers : {
+        //         'Authorization': `Bearer ${token}`
+        //     }
+        // })
+        // .then((res) => {
+        //     // setLoading(false)
+        //     const result = res.data.data[0]
+        //     navigate('/profile')
+        //     window.location.reload()
+        //     alert(`Your profile picture is updated`)
+        // })
+        // .catch((err) => {
+        //     // setLoading(false)
+        //     console.log(err.message);
+        //     setErrorMessage(err.response.message)
+        // })
     }
+    
+    useEffect(() => {
+        const token = JSON.parse(localStorage.getItem("token"));
+        if (token) {
+          setUser(data[0]);
+        }
+      }, []);
+
     return (
         <div className='Profile'>
                 <Header display_name={user ? `${user.first_name} ${user.last_name}` : `Profile Name`} phone_number={user ? user.phone_number : `Phone Number`} profile_picture={user && user.profile_picture} />

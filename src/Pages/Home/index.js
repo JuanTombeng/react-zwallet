@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { userContext } from "../../Context/UserContext";
+// import axios from "axios";
+// import { userContext } from "../../Context/UserContext";
 import defaultProfile from "../../images/default.jpg";
 import "./home.css";
 
@@ -14,37 +14,53 @@ import Chart from "../../Components/Chart/Chart";
 import History from "../../Components/History/History";
 import Card from "../../Components/Card/Card";
 
+import { useDispatch, useSelector } from "react-redux";
+import { GetUserDetail } from "../../Redux/actions/users";
+
 const Home = () => {
-  const [loading, setLoading] = useState(false);
-  const { user, setUser } = useContext(userContext);
+  // const [loading, setLoading] = useState(false);
+  // const { user, setUser } = useContext(userContext);
+
+  const [user, setUser] = useState(null);
+  const dispacth = useDispatch();
+  const { data, loading, error } = useSelector((state) => state.UserDetail);
+
   const navigate = useNavigate();
   const token = JSON.parse(localStorage.getItem("token"));
-  const [headerProfile, setHeaderProfile] = useState({
-    displayName: "",
-    phoneNumber: "",
-    balance: 0,
-  });
+  // const [headerProfile, setHeaderProfile] = useState({
+  //   displayName: "",
+  //   phoneNumber: "",
+  //   balance: 0,
+  // });
   const [transactionHistory, setTransactionHistory] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
+  // useEffect(() => {
+  //   axios({
+  //     baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
+  //     method: "GET",
+  //     url: `/v2/transactions/transaction-history/`,
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       setLoading(false);
+  //       const result = res.data.data;
+  //       setTransactionHistory(result);
+  //     })
+  //     .catch((err) => {
+  //       setLoading(false);
+  //       setErrorMessage(err.response.message);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    axios({
-      baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
-      method: "GET",
-      url: `/v2/transactions/transaction-history/`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        setLoading(false);
-        const result = res.data.data;
-        setTransactionHistory(result);
-      })
-      .catch((err) => {
-        setLoading(false);
-        setErrorMessage(err.response.message);
-      });
+    const token = JSON.parse(localStorage.getItem("token"));
+    if (token) {
+      dispacth(GetUserDetail());
+      setUser(data[0]);
+    }
   }, []);
 
   const handleLogout = () => {
