@@ -28,3 +28,13 @@
     color: #6379F4!important;
     text-decoration: none;
 }
+
+.card-list-wrapper {
+    height: 290px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.card-list-wrapper::-webkit-scrollbar {
+    display: none;
+}

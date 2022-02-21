@@ -6,10 +6,10 @@ function Card(props) {
         return (
             <div className='Card' onClick={props.onClick}>
                 <div className="row box p-3 m-md-2 p-md-3 d-flex align-items-center">
-                    <div className="col col-3 col-md-2 col-lg-1 g-0 d-flex justify-content-center">
+                    <div className="col col-4 col-md-3 col-lg-2 g-0 d-flex justify-content-center">
                         <img src={props.image} className="user-picture" alt="" />
                     </div>
-                    <div className="col col-3 col-md-4 col-lg-5 g-0 d-flex flex-column px-2">
+                    <div className="col col-2 col-md-3 col-lg-4 g-0 d-flex flex-column px-2">
                         <h2 className="font-18 m-0 d-flex">
                             {props.first_name} {props.last_name}
                         </h2>

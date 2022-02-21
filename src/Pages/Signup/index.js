@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import axios from 'axios'
-import leftBackground from '../../images/bg-app.svg'
 import Input from '../../Components/Input/Input'
 import Button from '../../Components/Button/index'
 import LeftSectionLogin from '../../Components/LeftSectionLogin/index'
@@ -24,6 +22,7 @@ const Signup = () => {
         })
     }
     const handleClick = () => {
+        setLoading(true)
         navigate(`/create-pin`, { state : {...form}})
     }
     return (

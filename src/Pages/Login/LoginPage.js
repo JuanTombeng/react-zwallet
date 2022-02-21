@@ -1,20 +1,20 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import axios from 'axios'
 import Input from '../../Components/Input/Input'
 import Button from '../../Components/Button/index'
 import LeftSectionLogin from '../../Components/LeftSectionLogin/index'
-import {userContext} from '../../Context/UserContext'
+
+import {useDispatch} from 'react-redux'
+import { PostLogin } from '../../Redux/actions/auth'
 import './loginPage.css'
 
 const LoginPage = () => {
-
     const [form, setForm] = useState({
         email : '',
         password : ''
     })
+    const dispacth = useDispatch()
     const [loading, setLoading] = useState(false)
-    const {user, setUser} = useContext(userContext)
     const [errorMessage, setErrorMessage] = useState('')
     const navigate = useNavigate()
     const handleChangeForm = (e) => {
@@ -25,31 +25,33 @@ const LoginPage = () => {
     }
     const handleClick = () => {
         setLoading(false)
-        axios({
-            baseURL: `${process.env.REACT_APP_URL_BACKEND}`,
-            data : {
-                email : form.email,
-                password : form.password
-            },
-            method : 'POST',
-            url : `/users/login`
-        })
-        .then((res) => {
-            setLoading(false)
-            const result = res.data.data[0]
-            console.log(result)
-            navigate('/')
-            // localStorage.setItem('auth', '1')
-            // localStorage.setItem('userId', JSON.stringify(result.id))
-        })
-        .catch((err) => {
-            setLoading(false)
-            console.log(err.message);
-            setErrorMessage(err.response.message)
-        })
-
+        if (form.email === '' || form.password === '') {
+            setErrorMessage('Please Fill in the Login Form')
+        } else {
+            // axios({
+            //     baseURL : `${process.env.REACT_APP_URL_BACKEND}`,
+            //     data : {
+            //         email : form.email,
+            //         password : form.password
+            //     },
+            //     method : 'POST',
+            //     url : `/v2/users/login`
+            // })
+            // .then((res) => {
+            //     setLoading(false)
+            //     const result = res.data.data[0]
+            //     localStorage.setItem('auth', '0')
+            //     localStorage.setItem('token', JSON.stringify(result.token))
+            //     navigate('/')
+            // })
+            // .catch((err) => {
+            //     setLoading(false)
+            //     console.log(err.message);
+            //     setErrorMessage(err.response.message)
+            // })
+            dispacth(PostLogin(form))
+        }
     }
-
     return (
         <div className="Login-Page d-flex">
             <LeftSectionLogin />

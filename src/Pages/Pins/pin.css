@@ -1,18 +1,25 @@
 .Create-Pin {
-    width: 100%;
+    width: 80%;
     height: 100vh;
+    margin: auto;
 }
 
 .right-section-pin-page {
     width: 50%;
     height: 100vh;
-    padding: 50px 150px 0 50px ;
     box-sizing: border-box;
+    padding: 50px;
+}
+
+.pin-upper-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pin-input {
-    width: 60px;
-    height: 70px;
+    width: 80px;
+    height: 100px;
     margin-right: 20px;
     border: 1px solid rgba(169, 169, 169, 0.6);
     box-sizing: border-box;
